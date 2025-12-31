@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Events\OrderPlaced;
 use App\Http\Controllers\BaseController;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -36,10 +37,8 @@ class OrderController extends BaseController
             'status'     => $request->status ?? 'pending',
         ]);
 
-        // please add the event/brodcasting for status update
-        // broadcast(new OrderPlaced($order))->toOthers();
         $order = Order::with('product')->find($order->id);
-        // event(new OrderPlaced($order));
+        event(new OrderPlaced($order));
 
         return $this->sendResponse($order, 'Order has been created successfully.');
 
@@ -53,8 +52,6 @@ class OrderController extends BaseController
 
         $order = Order::with('product')->findOrFail($id);
         $order->update(['status' => $request->status]);
-
-        // event(new OrderStatusUpdated($order));
 
         return $this->sendResponse($order, 'Order status updated');
     }

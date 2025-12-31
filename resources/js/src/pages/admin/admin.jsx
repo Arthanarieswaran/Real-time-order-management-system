@@ -27,6 +27,7 @@ const Admin = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    // const [orders, setOrders] = useState([]);
 
     // Modal state
     const [open, setOpen] = useState(false);
@@ -51,6 +52,20 @@ const Admin = () => {
 
     useEffect(() => {
         fetchOrders();
+    }, []);
+
+    useEffect(() => {
+        window.Echo
+            .channel('orders')
+            .listen('.order.placed', (e) => {
+                console.log('Admin received new order', e.order);
+
+                setData((prev) => [e.order, ...prev]);
+            });
+
+        return () => {
+            window.Echo.leave('orders');
+        };
     }, []);
 
     const getStatusColor = (status) => {
