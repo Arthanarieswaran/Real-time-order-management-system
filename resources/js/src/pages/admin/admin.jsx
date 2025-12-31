@@ -139,6 +139,7 @@ const Admin = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
+                                <TableCell>S.No</TableCell>
                                 <TableCell>Date</TableCell>
                                 <TableCell>Order ID</TableCell>
                                 <TableCell>Product Name</TableCell>
@@ -150,8 +151,9 @@ const Admin = () => {
                         </TableHead>
 
                         <TableBody>
-                            {data.map((row) => (
+                            {data.map((row, index) => (
                                 <TableRow key={row.id}>
+                                    <TableCell>{index + 1}</TableCell>
                                     <TableCell>
                                         {new Date(row.created_at).toLocaleDateString()}
                                     </TableCell>

@@ -55,10 +55,10 @@ const ProductsList = ({ currentUserId }) => {
     };
 
     const handleBuy = async (productId) => {
-        const quantity = cart[productId] || 1; // default 1 if not in cart
+        const quantity = cart[productId] || 1; 
         try {
             const payload = {
-                user_id: currentUserId, // dynamic user_id
+                user_id: currentUserId, 
                 product_id: productId,
                 quantity: quantity,
             };
@@ -66,7 +66,6 @@ const ProductsList = ({ currentUserId }) => {
 
             if (res.data.success) {
                 alert("Order placed successfully!");
-                // Optionally reset cart count for this product
                 setCart((prev) => ({ ...prev, [productId]: 0 }));
             } else {
                 alert("Failed to place order");
@@ -116,7 +115,6 @@ const ProductsList = ({ currentUserId }) => {
                                         ${product.price}
                                     </Typography>
 
-                                    {/* Cart & Buy */}
                                     <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
                                         <IconButton
                                             color="primary"

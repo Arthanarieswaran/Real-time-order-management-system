@@ -24,7 +24,7 @@ const OrdersTable = () => {
     const navigate = useNavigate();
 
     const handleEditClick = () => {
-        navigate("/product_list"); // Replace with your product list route
+        navigate("/product_list"); 
     };
 
     const fetchOrders = async () => {
@@ -116,6 +116,7 @@ const OrdersTable = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
+                                <TableCell>S.No</TableCell>
                                 <TableCell>Date</TableCell>
                                 <TableCell>Order ID</TableCell>
                                 <TableCell>Product</TableCell>
@@ -125,8 +126,9 @@ const OrdersTable = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {orders.map((row) => (
+                            {orders.map((row, index) => (
                                 <TableRow key={row.id}>
+                                    <TableCell>{index + 1}</TableCell>
                                     <TableCell>{new Date(row.created_at).toLocaleDateString()}</TableCell>
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.product.name}</TableCell>
