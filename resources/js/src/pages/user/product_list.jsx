@@ -86,7 +86,7 @@ const ProductsList = ({ currentUserId }) => {
 
             <Box p={4}>
                 <Typography variant="h4" gutterBottom>
-                    Your Order Summary
+                    Featured Products
                     <Button
                         variant="outlined"
                         size="small"
