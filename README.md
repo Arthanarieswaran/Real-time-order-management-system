@@ -41,7 +41,7 @@ Users can create orders from the frontend, and order status updates are pushed l
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Arthanarieswaran/Real-time-order-management-system.git
 cd project-folder
 composer install
 cp .env.example .env
@@ -55,7 +55,10 @@ php artisan reverb:start
 php artisan queue:work
 
 ----------------------------------
- **API response examples**
+
+ **API Response Examples**
+ * Please update your base URL accordingly
+
 1. Order List (For Admin)
     curl --location 'http://127.0.0.1:8000/api/orders' \
     --data ''
