@@ -52,13 +52,10 @@ php artisan db:seed --class=ProductSeeder
 php artisan serve
 npm run dev
 php artisan reverb:start
-php artisan queue:work ```bash
+php artisan queue:work
 
-
----
-
-### 1. API response examples
-- **API response examples**
+----------------------------------
+ **API response examples**
 1. Order List (For Admin)
     curl --location 'http://127.0.0.1:8000/api/orders' \
     --data ''
