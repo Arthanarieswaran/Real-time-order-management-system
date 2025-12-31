@@ -47,6 +47,36 @@ const OrdersTable = () => {
         fetchOrders();
     }, []);
 
+    useEffect(() => {
+
+        // New order placed
+        window.Echo
+            .channel('orders')
+            .listen('.order.placed', (e) => {
+                console.log('User received new order', e.order);
+
+                setOrders((prev) => [e.order, ...prev]);
+            });
+
+        // Status updated by admin
+        window.Echo
+            .channel('orders')
+            .listen('.order.status.updated', (e) => {
+                console.log('Status updated', e.order);
+
+                setOrders((prev) =>
+                    prev.map((order) =>
+                        order.id === e.order.id ? e.order : order
+                    )
+                );
+            });
+
+        return () => {
+            window.Echo.leave('orders');
+        };
+
+    }, []);
+
     const getStatusColor = (status) => {
         switch (status.toLowerCase()) {
             case "processing":

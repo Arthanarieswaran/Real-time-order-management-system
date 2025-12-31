@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Events\OrderPlaced;
-use App\Http\Controllers\BaseController;
-use App\Models\Order;
-use Illuminate\Http\Request;
 use Validator;
+use App\Models\Order;
+use App\Events\OrderPlaced;
+use Illuminate\Http\Request;
+use App\Events\OrderStatusUpdated;
+use App\Http\Controllers\BaseController;
 
 class OrderController extends BaseController
 {
@@ -52,6 +53,8 @@ class OrderController extends BaseController
 
         $order = Order::with('product')->findOrFail($id);
         $order->update(['status' => $request->status]);
+
+        event(new OrderStatusUpdated($order));
 
         return $this->sendResponse($order, 'Order status updated');
     }
